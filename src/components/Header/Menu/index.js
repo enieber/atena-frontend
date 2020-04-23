@@ -8,7 +8,7 @@ import { Creators as AuthActions } from '../../../store/ducks/auth'
 
 import Auth from '../../auth'
 import avatarSvg from '../../../assets/avatarWhite.svg'
-import StyledMenu from './styles'
+import StyledMenu, { Button } from './styles'
 
 class Menu extends Component {
   static propTypes = {
@@ -37,12 +37,12 @@ class Menu extends Component {
         <StyledMenu>
           <li key="index">
             <Link to="/">
-              <button>como funciona</button>
+              <Button>como funciona</Button>
             </Link>
           </li>
           <li key="ranking">
             <Link to="/ranking">
-              <button>ranking</button>
+              <Button>ranking</Button>
             </Link>
           </li>
           {uuid ? (
@@ -50,17 +50,17 @@ class Menu extends Component {
               {isCoreTeam && (
                 <li key="admin">
                   <Link to="/admin">
-                    <button>Admin</button>
+                    <Button>Admin</Button>
                   </Link>
                 </li>
               )}
 
               <li key="logout">
-                <button onClick={this.logout}>logout</button>
+                <Button danger onClick={this.logout}>logout</Button>
               </li>
               <li className="user">
                 <Link to="/userInfo">
-                  <button className="profile">
+                  <Button className="profile">
                     <img
                       src={avatar || avatarSvg}
                       onError={e => {
@@ -70,13 +70,13 @@ class Menu extends Component {
                       alt={`Foto do usuário`}
                       className="avatar"
                     />
-                  </button>
+                  </Button>
                 </Link>
               </li>
             </>
           ) : (
             <li key="login">
-              <button onClick={this.toggleModal}>login</button>
+              <Button primary onClick={this.toggleModal}>login</Button>
             </li>
           )}
         </StyledMenu>

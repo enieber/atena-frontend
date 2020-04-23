@@ -1,6 +1,69 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
+export const Button = styled.button`
+  background: ${(props) => {
+    if (props.primary) {
+      return theme.color.green
+    }
+    if (props.danger) {
+      return theme.color.secondary
+    }
+    return 'transparent'
+  }};
+  color: ${theme.color.white};
+  cursor: pointer;
+  font-weight: 600;
+  outline: none;
+  text-transform: uppercase;
+  padding: ${(props) => {
+    if (props.primary || props.danger) {
+      return '10px'
+    }
+    return 0
+  }};
+  border-radius: ${(props) => {
+    if (props.primary || props.danger) {
+      return '4px'
+    }
+    return 0
+  }};
+
+  &::after {
+    background: ${theme.color.primaryLight};
+    border-radius: 3px;
+    content: '';
+    display: block;
+    height: 3px;
+    position: absolute;
+    transition: 0.2s all ease-in;
+    transform: translateY(5px);
+    width: 0px;
+  }
+
+  &.selected::after {
+    width: 20px;
+  }
+
+  &:hover {
+    color: ${(props) => {
+      if (props.primary || props.danger) {
+        return theme.color.white
+      }
+      return theme.color.primaryLight
+    }};
+
+    &::after {
+      width: ${(props) => {
+        if (props.primary || props.danger) {
+          return '0px'
+        }
+        return '20px'
+      }};
+    }
+  }
+`
+
 const StyledMenu = styled.ul`
   align-items: center;
   display: flex;
@@ -39,39 +102,6 @@ const StyledMenu = styled.ul`
       height: 50px;
       text-indent: -9999px;
       width: 50px;
-    }
-  }
-
-  button {
-    background: transparent;
-    color: ${theme.color.white};
-    cursor: pointer;
-    font-weight: 600;
-    outline: none;
-    text-transform: uppercase;
-
-    &::after {
-      background: ${theme.color.primaryLight};
-      border-radius: 3px;
-      content: '';
-      display: block;
-      height: 3px;
-      position: absolute;
-      transition: 0.2s all ease-in;
-      transform: translateY(5px);
-      width: 0px;
-    }
-
-    &.selected::after {
-      width: 20px;
-    }
-
-    &:hover {
-      color: ${theme.color.primaryLight};
-
-      &::after {
-        width: 20px;
-      }
     }
   }
 
